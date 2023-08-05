@@ -3,9 +3,12 @@ import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 
 import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
-import { deleteTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+import {
+  deleteTrackCodesData,
+  clearTrackCodesData,
+} from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
-const TrackCodes = ({ getData }) => {
+const TrackCodesHistory = ({ getData }) => {
   const trackCodes = useSelector(selectTrackCodesData);
 
   const dispatch = useDispatch();
@@ -34,10 +37,13 @@ const TrackCodes = ({ getData }) => {
           })}
         </ul>
       )}
+      <button type="button" onClick={() => dispatch(clearTrackCodesData())}>
+        Clear
+      </button>
     </>
   );
 };
 
-TrackCodes.propTypes = { getData: PropTypes.func.isRequired };
+TrackCodesHistory.propTypes = { getData: PropTypes.func.isRequired };
 
-export default TrackCodes;
+export default TrackCodesHistory;

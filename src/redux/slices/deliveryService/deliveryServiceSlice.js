@@ -23,6 +23,9 @@ const delivertServiceSlice = createSlice({
         (el) => el.trackCode !== action.payload
       );
     },
+    clearTrackCodesData(state) {
+      state.trackCodesData = [];
+    },
   },
 });
 
@@ -31,5 +34,6 @@ export const {
   setCurrentCity,
   addTrackCodesData,
   deleteTrackCodesData,
+  clearTrackCodesData,
 } = delivertServiceSlice.actions;
 export const delivertServiceReducer = delivertServiceSlice.reducer;

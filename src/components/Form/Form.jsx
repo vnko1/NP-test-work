@@ -1,8 +1,11 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import PropTypes from "prop-types";
+
+import { setCurrentCity } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
 const Form = ({
   value = "",
@@ -12,14 +15,15 @@ const Form = ({
   schema,
   getData,
   resetForm,
+  isLoading,
 }) => {
   const {
     register,
     handleSubmit,
     reset,
-    // watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     if (name === "trackCode") {
@@ -28,7 +32,10 @@ const Form = ({
       await getData(trackCodes);
     }
 
-    if (name === "city") await getData(data[name]);
+    if (name === "city") {
+      dispatch(setCurrentCity(data[name]));
+      await getData({ city: data[name] });
+    }
 
     resetForm && reset();
   };
@@ -52,7 +59,7 @@ const Form = ({
         }}
       />
       <LoadingButton
-        // loading
+        loading={isLoading}
         variant="contained"
         fullWidth
         type="submit"
@@ -72,6 +79,7 @@ Form.propTypes = {
   schema: PropTypes.object.isRequired,
   getData: PropTypes.func.isRequired,
   resetForm: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Form;
