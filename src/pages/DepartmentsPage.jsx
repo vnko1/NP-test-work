@@ -1,5 +1,9 @@
+// import { useGetWareHousesMutation } from "/src/redux/api/deliveryServiceApi";
+
 const DepartmentsPage = () => {
-  return <div>Departments</div>;
+  // const [getWarhouses, response] = useGetWareHousesMutation();
+  // console.log(response);
+  return <div>CLICK WAREHOUSE</div>;
 };
 
 export default DepartmentsPage;
