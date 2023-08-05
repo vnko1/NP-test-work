@@ -11,9 +11,14 @@ const delivertServiceSlice = createSlice({
       state.currentCity = action.payload;
     },
     addTrackCodesData(state, action) {
-      state.trackCodesData = [...state.trackCodesData, action.payload];
+      const isIncluded = state.trackCodesData.some(
+        (item) => item.trackCode === action.payload.trackCode
+      );
+
+      if (!isIncluded)
+        state.trackCodesData = [...state.trackCodesData, action.payload];
     },
-    deleteTweetId(state, action) {
+    deleteTrackCodesData(state, action) {
       state.trackCodesData = state.trackCodesData.filter(
         (el) => el !== action.payload
       );
@@ -25,6 +30,6 @@ export const {
   setCurrentTrackCode,
   setCurrentCity,
   addTrackCodesData,
-  deleteTweetId,
+  deleteTrackCodesData,
 } = delivertServiceSlice.actions;
 export const delivertServiceReducer = delivertServiceSlice.reducer;

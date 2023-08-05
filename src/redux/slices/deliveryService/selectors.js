@@ -1,7 +1,8 @@
 export const selectCurrentTrackCode = (state) =>
-  state.delivertService.currentTrackCode;
+  state.delivertService.delivertService.currentTrackCode;
 
-export const selectCurrentCity = (state) => state.delivertService.currentCity;
+export const selectCurrentCity = (state) =>
+  state.delivertService.delivertService.currentCity;
 
-export const selecttrackCodesData = (state) =>
-  state.delivertService.trackCodesData;
+export const selectTrackCodesData = (state) =>
+  state.delivertService.delivertService.trackCodesData;

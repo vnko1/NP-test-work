@@ -4,7 +4,15 @@ import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import PropTypes from "prop-types";
 
-const Form = ({ value = "", name, plaaceHolder, label, schema, getData }) => {
+const Form = ({
+  value = "",
+  name,
+  plaaceHolder,
+  label,
+  schema,
+  getData,
+  resetForm,
+}) => {
   const {
     register,
     handleSubmit,
@@ -15,7 +23,7 @@ const Form = ({ value = "", name, plaaceHolder, label, schema, getData }) => {
 
   const onSubmit = async (data) => {
     await getData([data["trackCode"]]);
-    reset();
+    resetForm && reset();
   };
 
   return (
@@ -56,6 +64,7 @@ Form.propTypes = {
   label: PropTypes.string.isRequired,
   schema: PropTypes.object.isRequired,
   getData: PropTypes.func.isRequired,
+  resetForm: PropTypes.bool.isRequired,
 };
 
 export default Form;

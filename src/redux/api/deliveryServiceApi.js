@@ -39,6 +39,7 @@ export const deliveryServiceApi = createApi({
             Status,
             Number,
             ActualDeliveryDate,
+            StatusCode,
           }) => ({
             WarehouseSender,
             WarehouseSenderAddress,
@@ -49,6 +50,7 @@ export const deliveryServiceApi = createApi({
             Status,
             Number,
             ActualDeliveryDate,
+            StatusCode,
           })
         );
 
