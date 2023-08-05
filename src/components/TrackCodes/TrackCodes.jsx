@@ -8,10 +8,6 @@ const TrackCodes = () => {
   const trackCodes = useSelector(selectTrackCodesData);
   const dispatch = useDispatch();
 
-  const handleClickDeleteTrackCode = (trackCode) => {
-    dispatch(deleteTrackCodesData(trackCode));
-  };
-
   const renderItem = trackCodes.length > 0;
   return (
     <>
@@ -24,7 +20,7 @@ const TrackCodes = () => {
                 <p>{item.trackCode}</p>
                 <button
                   type="button"
-                  onClick={() => handleClickDeleteTrackCode(item.trackCode)}
+                  onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
                 >
                   delete
                 </button>
