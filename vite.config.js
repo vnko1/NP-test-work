@@ -5,5 +5,9 @@ import jsconfigPaths from "vite-jsconfig-paths";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), jsconfigPaths()],
-  base: "/vite-react-template/",
+  base: "/np-test-work/",
+  server: {
+    open: "/",
+    port: 8000,
+  },
 });
