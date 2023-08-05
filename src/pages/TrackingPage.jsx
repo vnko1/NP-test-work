@@ -1,22 +1,60 @@
-// import { useDispatch } from "react-redux";
-// import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
-// import {
-//   setCurrentTrackCode,
-//   setCurrentCity,
-//   addTrackCodesData,
-//   deleteTweetId,
-// } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
+import {
+  setCurrentTrackCode,
+  setCurrentCity,
+  addTrackCodesData,
+} from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+
+import Form from "/src/components/Form/Form";
+import DeliveryStatus from "/src/components/DeliveryStatus/DeliveryStatus";
+import TrackCodes from "/src/components/TrackCodes/TrackCodes";
+import { formTrackCodeSchema } from "/src/utils/schema/schemaValidation";
 
 const TrackingPage = () => {
-  // const [getTrackData, response] = useGetDelivertStatusMutation();
-  // console.log(response.data);
-  // const dispatch = useDispatch();
+  // isLoading,
+  const [getTrackData, { isSuccess, data }] = useGetDelivertStatusMutation();
 
-  // // dispatch(setCurrentCity("Kiev"));
-  // // dispatch(setCurrentTrackCode("1203981093810938s"));
-  // // dispatch(addTrackCodesData({ trackCode: "asdakdjahkdhakd", city: "Kiev" }));
+  const dispatch = useDispatch();
 
-  return <>TRACK</>;
+  useEffect(() => {
+    if (isSuccess) {
+      data.data.forEach((item) => {
+        if (item.StatusCode !== "3") {
+          dispatch(setCurrentCity(item.CityRecipient));
+          dispatch(setCurrentTrackCode(item.Number));
+          dispatch(
+            addTrackCodesData({
+              trackCode: item.Number,
+              city: item.CityRecipient,
+            })
+          );
+        }
+      });
+    }
+  }, [data, dispatch, isSuccess]);
+
+  const renderItem = isSuccess && data.data[0].StatusCode !== "3";
+
+  return (
+    <>
+      <Form
+        name="trackCode"
+        plaaceHolder="Номер накладної"
+        label="Відстежити"
+        schema={formTrackCodeSchema}
+        getData={getTrackData}
+        resetForm={true}
+      />
+      {renderItem ? (
+        <DeliveryStatus documents={data.data} />
+      ) : (
+        <div>{data?.data[0].Status}</div>
+      )}
+      <TrackCodes getData={getTrackData} />
+    </>
+  );
 };
 
 export default TrackingPage;
