@@ -1,20 +1,20 @@
-import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
 import {
   setCurrentTrackCode,
   setCurrentCity,
   addTrackCodesData,
-  deleteTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
 import Form from "/src/components/Form/Form";
+import DeliveryStatus from "/src/components/DeliveryStatus/DeliveryStatus";
+import TrackCodes from "/src/components/TrackCodes/TrackCodes";
 import { formTrackCodeSchema } from "/src/utils/schema/schemaValidation";
-import { useEffect } from "react";
 
 const TrackingPage = () => {
-  const [getTrackData, { isSuccess, isLoading, data }] =
-    useGetDelivertStatusMutation();
-
+  // isLoading,
+  const [getTrackData, { isSuccess, data }] = useGetDelivertStatusMutation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,15 +34,20 @@ const TrackingPage = () => {
     }
   }, [data, dispatch, isSuccess]);
 
+  const renderItem = isSuccess && data.data[0].StatusCode !== 3;
   return (
-    <Form
-      name="trackCode"
-      plaaceHolder="Номер накладної"
-      label="Відстежити"
-      schema={formTrackCodeSchema}
-      getData={getTrackData}
-      resetForm={true}
-    ></Form>
+    <>
+      <Form
+        name="trackCode"
+        plaaceHolder="Номер накладної"
+        label="Відстежити"
+        schema={formTrackCodeSchema}
+        getData={getTrackData}
+        resetForm={true}
+      />
+      {renderItem && <DeliveryStatus documents={data.data} />}
+      <TrackCodes />
+    </>
   );
 };
 

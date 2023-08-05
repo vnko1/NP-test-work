@@ -20,7 +20,7 @@ const delivertServiceSlice = createSlice({
     },
     deleteTrackCodesData(state, action) {
       state.trackCodesData = state.trackCodesData.filter(
-        (el) => el !== action.payload
+        (el) => el.trackCode !== action.payload
       );
     },
   },
