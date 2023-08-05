@@ -1,11 +1,11 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import SharedLayout from "/src/components/SharedLayout/SharedLayout";
 import TrackingPage from "/src/pages/TrackingPage";
 import DepartmentsPage from "/src/pages/DepartmentsPage";
 import NotFoundPage from "/src/pages/NotFoundPage";
 
 const Router = () => {
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     [
       {
         path: "/",
