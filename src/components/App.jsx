@@ -1,7 +1,12 @@
+import Router from "./Router";
 import "./App.css";
 
 function App() {
-  return <>My own vite react template</>;
+  return (
+    <>
+      <Router />
+    </>
+  );
 }
 
 export default App;
