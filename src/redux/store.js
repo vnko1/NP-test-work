@@ -17,6 +17,7 @@ import { delivertServiceReducer } from "/src/redux/slices/deliveryService/delive
 const delivertServicePersistConfig = {
   key: "root",
   storage,
+  blackList: [""],
 };
 
 const rootReducer = combineReducers({

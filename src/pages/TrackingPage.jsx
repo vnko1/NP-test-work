@@ -15,6 +15,7 @@ import { formTrackCodeSchema } from "/src/utils/schema/schemaValidation";
 const TrackingPage = () => {
   // isLoading,
   const [getTrackData, { isSuccess, data }] = useGetDelivertStatusMutation();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,8 +47,12 @@ const TrackingPage = () => {
         getData={getTrackData}
         resetForm={true}
       />
-      {renderItem && <DeliveryStatus documents={data.data} />}
-      <TrackCodes />
+      {renderItem ? (
+        <DeliveryStatus documents={data.data} />
+      ) : (
+        <div>{data?.data[0].Status}</div>
+      )}
+      <TrackCodes getData={getTrackData} />
     </>
   );
 };

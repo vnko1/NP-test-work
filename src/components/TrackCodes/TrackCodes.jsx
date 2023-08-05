@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 
 import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
 import { deleteTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
-const TrackCodes = () => {
+const TrackCodes = ({ getData }) => {
   const trackCodes = useSelector(selectTrackCodesData);
+
   const dispatch = useDispatch();
 
   const renderItem = trackCodes.length > 0;
@@ -18,6 +20,9 @@ const TrackCodes = () => {
             return (
               <li key={nanoid()}>
                 <p>{item.trackCode}</p>
+                <button type="button" onClick={() => getData([item.trackCode])}>
+                  search
+                </button>
                 <button
                   type="button"
                   onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
@@ -32,5 +37,7 @@ const TrackCodes = () => {
     </>
   );
 };
+
+TrackCodes.propTypes = { getData: PropTypes.func.isRequired };
 
 export default TrackCodes;
