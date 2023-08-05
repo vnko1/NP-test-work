@@ -22,8 +22,14 @@ const Form = ({
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    if (name === "trackCode") await getData([data[name]]);
+    if (name === "trackCode") {
+      const keys = Object.keys(data);
+      const trackCodes = keys.map((item) => data[item]);
+      await getData(trackCodes);
+    }
+
     if (name === "city") await getData(data[name]);
+
     resetForm && reset();
   };
 

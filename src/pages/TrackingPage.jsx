@@ -34,7 +34,8 @@ const TrackingPage = () => {
     }
   }, [data, dispatch, isSuccess]);
 
-  const renderItem = isSuccess && data.data[0].StatusCode !== 3;
+  const renderItem = isSuccess && data.data[0].StatusCode !== "3";
+
   return (
     <>
       <Form
