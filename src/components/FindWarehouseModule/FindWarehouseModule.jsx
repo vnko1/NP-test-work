@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import Form from "/src/components/Shared/Form/Form";
-import Warehouses from "/src/components/FindwareHouseModule/Warehouses/Warehouses";
+import Warehouses from "/src/components/FindWarehouseModule/Warehouses/Warehouses";
 
 import { useGetWareHousesMutation } from "/src/redux/api/deliveryServiceApi";
 import { selectCurrentCity } from "/src/redux/slices/deliveryService/selectors";
