@@ -5,6 +5,14 @@ const WareHouses = ({ documents, total, setPage, page }) => {
   const handleChange = async (_, value) => {
     setPage(value);
   };
+
+  const renderPagination = Math.ceil(total / 10) > 1 && (
+    <Pagination
+      count={Math.ceil(total / 10)}
+      page={page}
+      onChange={handleChange}
+    />
+  );
   return (
     <div>
       <ul>
@@ -32,11 +40,7 @@ const WareHouses = ({ documents, total, setPage, page }) => {
           );
         })}
       </ul>
-      <Pagination
-        count={Math.ceil(total / 10)}
-        page={page}
-        onChange={handleChange}
-      />
+      {renderPagination}
     </div>
   );
 };
