@@ -9,11 +9,11 @@ import { formCitySchema } from "utils/schema/schemaValidation";
 import { useEffect, useState } from "react";
 
 const DepartmentsPage = () => {
+  const currentCity = useSelector(selectCurrentCity);
   const [page, setPage] = useState(1);
+  const [value, setValue] = useState(currentCity);
   const [getWarhouses, { isSuccess, isLoading, data }] =
     useGetWareHousesMutation();
-
-  const currentCity = useSelector(selectCurrentCity);
 
   useEffect(() => {
     page > 1 && getWarhouses({ city: currentCity, page });
@@ -36,14 +36,15 @@ const DepartmentsPage = () => {
   return (
     <>
       <Form
-        value={currentCity}
+        value={value}
         name="city"
         plaaceHolder="Місто"
         label="Знайти відділення"
         schema={formCitySchema}
         getData={getWarhouses}
-        resetForm={false}
+        setValue={setValue}
         isLoading={isLoading}
+        setPage={setPage}
       />
       {renderItem}
       {renderNotFoundNotify}

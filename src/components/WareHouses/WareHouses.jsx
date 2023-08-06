@@ -32,7 +32,11 @@ const WareHouses = ({ documents, total, setPage, page }) => {
           );
         })}
       </ul>
-      <Pagination count={total} page={page} onChange={handleChange} />
+      <Pagination
+        count={Math.ceil(total / 10)}
+        page={page}
+        onChange={handleChange}
+      />
     </div>
   );
 };

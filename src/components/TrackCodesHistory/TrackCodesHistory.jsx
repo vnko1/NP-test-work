@@ -8,7 +8,7 @@ import {
   clearTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
-const TrackCodesHistory = ({ getData }) => {
+const TrackCodesHistory = ({ getData, setValue }) => {
   const trackCodes = useSelector(selectTrackCodesData);
 
   const dispatch = useDispatch();
@@ -23,7 +23,13 @@ const TrackCodesHistory = ({ getData }) => {
             return (
               <li key={nanoid()}>
                 <p>{item.trackCode}</p>
-                <button type="button" onClick={() => getData([item.trackCode])}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    getData([item.trackCode]);
+                    setValue(item.trackCode);
+                  }}
+                >
                   search
                 </button>
                 <button
@@ -44,6 +50,9 @@ const TrackCodesHistory = ({ getData }) => {
   );
 };
 
-TrackCodesHistory.propTypes = { getData: PropTypes.func.isRequired };
+TrackCodesHistory.propTypes = {
+  getData: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
 
 export default TrackCodesHistory;
