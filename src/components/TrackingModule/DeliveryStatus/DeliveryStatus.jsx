@@ -3,7 +3,7 @@ import { Typography, CardContent, Card, Zoom } from "@mui/material";
 
 const DeliveryStatus = ({ documents, isSuccess }) => {
   const renderItem = documents.map((item) => (
-    <Zoom in={isSuccess} key={item.Number} timeout={500}>
+    <Zoom in={isSuccess} key={item.Number} timeout={500} sx={{ mt: 2 }}>
       <Card sx={{ boxShadow: 5 }}>
         <CardContent sx={{ textAlign: "center", p: 2 }}>
           <Typography sx={{ fontSize: 20, fontWeight: 900 }}>
@@ -16,13 +16,13 @@ const DeliveryStatus = ({ documents, isSuccess }) => {
             ВІДПРАВЛЕНО:
           </Typography>
           <Typography sx={{ fontSize: 20 }} gutterBottom>
-            {item.WarehouseSender}
+            {item.CitySender}, {item.WarehouseSender}
           </Typography>
           <Typography sx={{ fontSize: 20, fontWeight: 900 }}>
             ОТРИМАНО:
           </Typography>
           <Typography sx={{ fontSize: 20 }} gutterBottom>
-            {item.WarehouseRecipient}
+            {item.CityRecipient}, {item.WarehouseRecipient}
           </Typography>
         </CardContent>
       </Card>
