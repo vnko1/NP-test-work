@@ -54,6 +54,7 @@ const TrackingModule = () => {
         getData={getTrackData}
         isLoading={isLoading}
         setStateValue={setValue}
+        text="Відстежити відправлення"
       />
       <TrackCodesHistoryListMemo getData={getTrackData} setValue={setValue} />
       {renderItem}
