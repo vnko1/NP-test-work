@@ -10,7 +10,7 @@ import {
   setCurrentCity,
   addTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
-import { formTrackCodeSchema } from "/src/utils/schema/schemaValidation";
+import { trackCodeSchema } from "/src/utils/schema/schemaValidation";
 
 const TrackingPage = () => {
   const [getTrackData, { isSuccess, isLoading, data }] =
@@ -51,7 +51,7 @@ const TrackingPage = () => {
         name="trackCode"
         plaaceHolder="Номер накладної"
         label="Відстежити"
-        schema={formTrackCodeSchema}
+        schema={trackCodeSchema}
         getData={getTrackData}
         isLoading={isLoading}
         setValue={setValue}

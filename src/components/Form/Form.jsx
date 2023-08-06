@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import PropTypes from "prop-types";
@@ -22,7 +21,7 @@ const Form = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm();
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
@@ -47,8 +46,12 @@ const Form = ({
         value={value}
         error={!!errors[name]?.message}
         fullWidth
-        {...register(name)}
-        onChange={(e) => setValue(e.target.value)}
+        {...register(name, {
+          ...schema,
+          onChange: (e) => {
+            setValue(e.target.value);
+          },
+        })}
         helperText={errors[name]?.message}
         placeholder={plaaceHolder}
         sx={{

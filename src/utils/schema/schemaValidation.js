@@ -1,18 +1,13 @@
-import * as yup from "yup";
+export const trackCodeSchema = {
+  minLength: { value: 14, message: "Необхідно ввести 14 цифр" },
+  maxLength: { value: 14, message: "Необхідно ввести 14 цифр" },
+  pattern: { value: /^[0-9]+$/, message: "Введіть цифри" },
+};
 
-export const formTrackCodeSchema = yup.object({
-  trackCode: yup
-    .string()
-    .min(14, "Необхідно ввести 14 символів")
-    .max(14, "Необхідно ввести 14 символів")
-    .matches(/^[0-9]+$/, { excludeEmptyString: true, message: "Введіть цифри" })
-    .required("Обовʼязковий"),
-});
-
-export const formCitySchema = yup.object({
-  city: yup
-    .string()
-    .min(2, "Мінімум 2 символи")
-    .matches(/^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+/, { excludeEmptyString: true })
-    .required("Обовʼязковий"),
-});
+export const сitySchema = {
+  minLength: { value: 2, message: "Введіть мінімум 2 символи" },
+  pattern: {
+    value: /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+/,
+    message: "Значення має бути в літерах",
+  },
+};
