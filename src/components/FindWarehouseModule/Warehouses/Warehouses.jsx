@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+
 import { Pagination } from "@mui/material";
 
-const WareHouses = ({ documents, total, setPage, page }) => {
+const Warehouses = ({ documents, total, setPage, page }) => {
   const handleChange = async (_, value) => {
     setPage(value);
   };
@@ -45,11 +46,11 @@ const WareHouses = ({ documents, total, setPage, page }) => {
   );
 };
 
-WareHouses.propTypes = {
+Warehouses.propTypes = {
   documents: PropTypes.array.isRequired,
   total: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
 };
 
-export default WareHouses;
+export default Warehouses;
