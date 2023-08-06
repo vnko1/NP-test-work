@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
 
+import Container from "@mui/material/Container";
+
+import ApplicationBar from "/src/components/Shared/ApplicationBar/ApplicationBar";
+
 const SharedLayout = () => {
   return (
     <>
-      <h1>SHARED</h1>
-      <Outlet />
+      <ApplicationBar />
+      <Container maxWidth="xl">
+        <Outlet />
+      </Container>
     </>
   );
 };
