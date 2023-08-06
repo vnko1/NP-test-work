@@ -1,36 +1,42 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import PropTypes from "prop-types";
 
+import { setCurrentCity } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+
 const Form = ({
-  value = "",
+  value,
+  setValue,
   name,
   plaaceHolder,
   label,
   schema,
   getData,
-  resetForm,
+  isLoading,
+  setPage,
 }) => {
   const {
     register,
     handleSubmit,
-    reset,
-    // watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     if (name === "trackCode") {
       const keys = Object.keys(data);
       const trackCodes = keys.map((item) => data[item]);
-      await getData(trackCodes);
+      getData(trackCodes);
     }
 
-    if (name === "city") await getData(data[name]);
-
-    resetForm && reset();
+    if (name === "city") {
+      dispatch(setCurrentCity(data[name]));
+      getData({ city: data[name], page: 1 });
+      setPage(1);
+    }
   };
 
   return (
@@ -38,10 +44,11 @@ const Form = ({
       <TextField
         id="outlined"
         label={label}
-        defaultValue={value}
+        value={value}
         error={!!errors[name]?.message}
-        {...register(name)}
         fullWidth
+        {...register(name)}
+        onChange={(e) => setValue(e.target.value)}
         helperText={errors[name]?.message}
         placeholder={plaaceHolder}
         sx={{
@@ -52,7 +59,7 @@ const Form = ({
         }}
       />
       <LoadingButton
-        // loading
+        loading={isLoading}
         variant="contained"
         fullWidth
         type="submit"
@@ -66,12 +73,14 @@ const Form = ({
 
 Form.propTypes = {
   value: PropTypes.string,
+  setValue: PropTypes.func.isRequired,
+  setPage: PropTypes.func,
   name: PropTypes.string.isRequired,
   plaaceHolder: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   schema: PropTypes.object.isRequired,
   getData: PropTypes.func.isRequired,
-  resetForm: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Form;

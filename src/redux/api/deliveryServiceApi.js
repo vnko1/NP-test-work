@@ -78,6 +78,7 @@ export const deliveryServiceApi = createApi({
           isSuccess: response?.success,
           errors: response?.errors,
           errorCodes: response?.errorCodes,
+          total: response.info.totalCount,
         };
         transformedResponse.data = response?.data.map(
           ({
@@ -94,6 +95,7 @@ export const deliveryServiceApi = createApi({
             Schedule,
             RegionCity,
             PostalCodeUA,
+            Ref,
           }) => ({
             Description,
             ShortAddress,
@@ -108,6 +110,7 @@ export const deliveryServiceApi = createApi({
             Schedule,
             RegionCity,
             PostalCodeUA,
+            Ref,
           })
         );
 
