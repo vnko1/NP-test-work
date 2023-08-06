@@ -6,11 +6,10 @@ import DeliveryStatus from "/src/components/DeliveryStatus/DeliveryStatus";
 import TrackCodesHistory from "/src/components/TrackCodesHistory/TrackCodesHistory";
 import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
 import {
-  setCurrentTrackCode,
   setCurrentCity,
   addTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
-import { formTrackCodeSchema } from "/src/utils/schema/schemaValidation";
+import { trackCodeSchema } from "/src/utils/schema/schemaValidation";
 
 const TrackingPage = () => {
   const [getTrackData, { isSuccess, isLoading, data }] =
@@ -24,7 +23,6 @@ const TrackingPage = () => {
       data.data.forEach((item) => {
         if (item.StatusCode !== "3") {
           dispatch(setCurrentCity(item.CityRecipient));
-          dispatch(setCurrentTrackCode(item.Number));
           dispatch(
             addTrackCodesData({
               trackCode: item.Number,
@@ -51,7 +49,7 @@ const TrackingPage = () => {
         name="trackCode"
         plaaceHolder="Номер накладної"
         label="Відстежити"
-        schema={formTrackCodeSchema}
+        schema={trackCodeSchema}
         getData={getTrackData}
         isLoading={isLoading}
         setValue={setValue}

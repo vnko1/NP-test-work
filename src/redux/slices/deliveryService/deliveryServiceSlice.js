@@ -2,11 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const delivertServiceSlice = createSlice({
   name: "delivertService",
-  initialState: { currentTrackCode: "", currentCity: "", trackCodesData: [] },
+  initialState: { currentCity: "", trackCodesData: [] },
   reducers: {
-    setCurrentTrackCode(state, action) {
-      state.currentTrackCode = action.payload;
-    },
     setCurrentCity(state, action) {
       state.currentCity = action.payload;
     },
@@ -30,7 +27,6 @@ const delivertServiceSlice = createSlice({
 });
 
 export const {
-  setCurrentTrackCode,
   setCurrentCity,
   addTrackCodesData,
   deleteTrackCodesData,

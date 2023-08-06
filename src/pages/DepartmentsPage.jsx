@@ -5,7 +5,7 @@ import WareHouses from "/src/components/WareHouses/WareHouses";
 
 import { useGetWareHousesMutation } from "/src/redux/api/deliveryServiceApi";
 import { selectCurrentCity } from "/src/redux/slices/deliveryService/selectors";
-import { formCitySchema } from "utils/schema/schemaValidation";
+import { сitySchema } from "utils/schema/schemaValidation";
 import { useEffect, useState } from "react";
 
 const DepartmentsPage = () => {
@@ -40,7 +40,7 @@ const DepartmentsPage = () => {
         name="city"
         plaaceHolder="Місто"
         label="Знайти відділення"
-        schema={formCitySchema}
+        schema={сitySchema}
         getData={getWarhouses}
         setValue={setValue}
         isLoading={isLoading}

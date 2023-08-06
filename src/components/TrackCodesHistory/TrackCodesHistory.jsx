@@ -13,41 +13,39 @@ const TrackCodesHistory = ({ getData, setValue }) => {
 
   const dispatch = useDispatch();
 
-  const renderItem = trackCodes.length > 0;
-  return (
+  const renderItem = trackCodes.length > 0 && (
     <>
       <h2>Історя</h2>
-      {renderItem && (
-        <ul>
-          {trackCodes.map((item) => {
-            return (
-              <li key={nanoid()}>
-                <p>{item.trackCode}</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    getData([item.trackCode]);
-                    setValue(item.trackCode);
-                  }}
-                >
-                  search
-                </button>
-                <button
-                  type="button"
-                  onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
-                >
-                  delete
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <ul>
+        {trackCodes.map((item) => {
+          return (
+            <li key={nanoid()}>
+              <p>{item.trackCode}</p>
+              <button
+                type="button"
+                onClick={() => {
+                  getData([item.trackCode]);
+                  setValue(item.trackCode);
+                }}
+              >
+                search
+              </button>
+              <button
+                type="button"
+                onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
+              >
+                delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
       <button type="button" onClick={() => dispatch(clearTrackCodesData())}>
         Clear
       </button>
     </>
   );
+  return <>{renderItem}</>;
 };
 
 TrackCodesHistory.propTypes = {
