@@ -42,7 +42,7 @@ const FindWarehouseModule = () => {
         label="Знайти відділення"
         schema={сitySchema}
         getData={getWarhouses}
-        setValue={setValue}
+        setStateValue={setValue}
         isLoading={isLoading}
         setPage={setPage}
       />
