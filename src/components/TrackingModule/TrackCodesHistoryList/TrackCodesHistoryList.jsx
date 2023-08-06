@@ -7,23 +7,20 @@ import {
   Typography,
   List,
   ListItem,
-  Button,
   IconButton,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import RemoveIcon from "@mui/icons-material/Remove";
+
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
-import {
-  deleteTrackCodesData,
-  clearTrackCodesData,
-} from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+import { clearTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
+import TrackCodesHistoryCard from "/src/components/TrackingModule/TrackCodesHistoryCard/TrackCodesHistoryCard";
 
-const TrackCodesHistory = ({ getData, setValue }) => {
+const TrackCodesHistoryList = ({ getData, setValue }) => {
   const trackCodes = useSelector(selectTrackCodesData);
 
   const dispatch = useDispatch();
@@ -34,20 +31,11 @@ const TrackCodesHistory = ({ getData, setValue }) => {
         {trackCodes.map((item) => {
           return (
             <ListItem key={nanoid()}>
-              <Button
-                onClick={() => {
-                  getData([item.trackCode]);
-                  setValue(item.trackCode);
-                }}
-                variant="text"
-              >
-                <Typography>{item.trackCode}</Typography>
-              </Button>
-              <IconButton
-                onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
-              >
-                <RemoveIcon />
-              </IconButton>
+              <TrackCodesHistoryCard
+                item={item}
+                getData={getData}
+                setValue={setValue}
+              />
             </ListItem>
           );
         })}
@@ -75,10 +63,10 @@ const TrackCodesHistory = ({ getData, setValue }) => {
   );
 };
 
-TrackCodesHistory.propTypes = {
+TrackCodesHistoryList.propTypes = {
   getData: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
 };
 
-const TrackCodesHistoryMemo = memo(TrackCodesHistory);
-export default TrackCodesHistoryMemo;
+const TrackCodesHistoryListMemo = memo(TrackCodesHistoryList);
+export default TrackCodesHistoryListMemo;

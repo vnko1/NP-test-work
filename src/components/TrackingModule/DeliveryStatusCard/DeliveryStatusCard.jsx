@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { Typography, CardContent, Card, Zoom } from "@mui/material";
 
-const DeliveryStatus = ({ documents, isSuccess }) => {
-  const renderItem = documents.map((item) => (
-    <Zoom in={isSuccess} key={item.Number} timeout={500} sx={{ mt: 2 }}>
+const DeliveryStatusCard = ({ isSuccess, item }) => {
+  return (
+    <Zoom in={isSuccess} timeout={500} sx={{ mt: 2 }}>
       <Card sx={{ boxShadow: 5 }}>
         <CardContent sx={{ textAlign: "center", p: 2 }}>
           <Typography sx={{ fontSize: 20, fontWeight: 900 }}>
@@ -27,13 +27,11 @@ const DeliveryStatus = ({ documents, isSuccess }) => {
         </CardContent>
       </Card>
     </Zoom>
-  ));
-  return <>{renderItem}</>;
+  );
 };
 
-DeliveryStatus.propTypes = {
-  documents: PropTypes.array.isRequired,
+DeliveryStatusCard.propTypes = {
+  item: PropTypes.object.isRequired,
   isSuccess: PropTypes.bool.isRequired,
 };
-
-export default DeliveryStatus;
+export default DeliveryStatusCard;

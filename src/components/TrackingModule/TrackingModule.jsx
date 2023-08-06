@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Form from "/src/components/Shared/Form/Form";
-import DeliveryStatus from "/src/components/TrackingModule/DeliveryStatus/DeliveryStatus";
-import TrackCodesHistoryMemo from "/src/components/TrackingModule/TrackCodesHistory/TrackCodesHistory";
+import DeliveryStatusList from "/src/components/TrackingModule/DeliveryStatusList/DeliveryStatusList";
+import TrackCodesHistoryListMemo from "/src/components/TrackingModule/TrackCodesHistoryList/TrackCodesHistoryList";
 import Loader from "/src/components/Shared/Loader/Loader";
 import NotFoundData from "/src/components/Shared/NotFoundData/NotFoundData";
 
@@ -37,7 +37,7 @@ const TrackingModule = () => {
   }, [data, dispatch, isSuccess]);
 
   const renderItem = isSuccess && data?.data[0]?.StatusCode !== "3" && (
-    <DeliveryStatus documents={data.data} isSuccess={isSuccess} />
+    <DeliveryStatusList documents={data.data} isSuccess={isSuccess} />
   );
 
   const renderNotFoundNotify = isSuccess &&
@@ -55,7 +55,7 @@ const TrackingModule = () => {
         isLoading={isLoading}
         setStateValue={setValue}
       />
-      <TrackCodesHistoryMemo getData={getTrackData} setValue={setValue} />
+      <TrackCodesHistoryListMemo getData={getTrackData} setValue={setValue} />
       {renderItem}
       {renderNotFoundNotify}
       <Loader isLoading={isLoading} />
