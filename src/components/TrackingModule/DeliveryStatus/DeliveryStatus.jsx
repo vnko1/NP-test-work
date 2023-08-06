@@ -7,8 +7,8 @@ const DeliveryStatus = ({ documents }) => {
         return (
           <li key={item.Number}>
             <p>Статус доставки: {item.Status}</p>
-            <p>Dідправлено: {item.WarehouseSender}</p>
-            <p>Отримано: {item.WarehouseRecipient}</p>
+            <p>Dідправлено: {item.WarehouseSenderAddress}</p>
+            <p>Отримано: {item.WarehouseRecipientAddress}</p>
           </li>
         );
       })}

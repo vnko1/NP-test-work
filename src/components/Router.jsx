@@ -1,7 +1,7 @@
 import { RouterProvider, createHashRouter } from "react-router-dom";
-import SharedLayout from "/src/components/SharedLayout/SharedLayout";
+import SharedLayout from "/src/components/Shared/Layout/Layout";
 import TrackingPage from "/src/pages/TrackingPage";
-import DepartmentsPage from "/src/pages/DepartmentsPage";
+import FindwarehousePage from "/src/pages/FindwarehousePage";
 import NotFoundPage from "/src/pages/NotFoundPage";
 
 const Router = () => {
@@ -11,7 +11,7 @@ const Router = () => {
       element: <SharedLayout />,
       children: [
         { index: true, element: <TrackingPage /> },
-        { path: "dep", element: <DepartmentsPage /> },
+        { path: "dep", element: <FindwarehousePage /> },
         { path: "*", element: <NotFoundPage /> },
       ],
     },

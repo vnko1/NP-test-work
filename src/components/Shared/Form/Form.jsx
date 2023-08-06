@@ -31,11 +31,7 @@ const Form = ({
   }, [clearErrors, isLoading]);
 
   const onSubmit = async (data) => {
-    if (name === "trackCode") {
-      const keys = Object.keys(data);
-      const trackCodes = keys.map((item) => data[item]);
-      getData(trackCodes);
-    }
+    if (name === "trackCode") getData([value]);
 
     if (name === "city") {
       dispatch(setCurrentCity(data[name]));
@@ -54,9 +50,7 @@ const Form = ({
         fullWidth
         {...register(name, {
           ...schema,
-          onChange: (e) => {
-            setValue(e.target.value);
-          },
+          onChange: (e) => setValue(e.target.value),
         })}
         helperText={errors[name]?.message}
         placeholder={plaaceHolder}

@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-import Form from "/src/components/Form/Form";
-import WareHouses from "/src/components/WareHouses/WareHouses";
+import Form from "/src/components/Shared/Form/Form";
+import Warehouses from "/src/components/FindwareHouseModule/Warehouses/Warehouses";
 
 import { useGetWareHousesMutation } from "/src/redux/api/deliveryServiceApi";
 import { selectCurrentCity } from "/src/redux/slices/deliveryService/selectors";
-import { сitySchema } from "utils/schema/schemaValidation";
-import { useEffect, useState } from "react";
+import { сitySchema } from "/src/utils/schema/schemaValidation";
 
-const DepartmentsPage = () => {
+const FindWarehouseModule = () => {
   const currentCity = useSelector(selectCurrentCity);
   const [page, setPage] = useState(1);
   const [value, setValue] = useState(currentCity);
@@ -20,7 +20,7 @@ const DepartmentsPage = () => {
   }, [currentCity, getWarhouses, page]);
 
   const renderItem = isSuccess && data.total > 0 && (
-    <WareHouses
+    <Warehouses
       documents={data.data}
       total={data.total}
       getData={getWarhouses}
@@ -52,4 +52,4 @@ const DepartmentsPage = () => {
   );
 };
 
-export default DepartmentsPage;
+export default FindWarehouseModule;
