@@ -16,13 +16,12 @@ const TrackingModule = () => {
   const [getTrackData, { isSuccess, isLoading, data }] =
     useGetDelivertStatusMutation();
   const [value, setValue] = useState("");
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isSuccess) {
       data.data.forEach((item) => {
-        if (item.StatusCode !== "3") {
+        if (item?.StatusCode !== "3") {
           dispatch(setCurrentCity(item.CityRecipient));
           dispatch(
             addTrackCodesData({
