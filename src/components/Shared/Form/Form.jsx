@@ -16,6 +16,7 @@ const Form = ({
   getData,
   isLoading,
   setPage,
+  text,
 }) => {
   const {
     register,
@@ -69,7 +70,7 @@ const Form = ({
         type="submit"
         disableRipple
       >
-        Пошук
+        {text}
       </Button>
     </form>
   );
@@ -85,6 +86,7 @@ Form.propTypes = {
   schema: PropTypes.object.isRequired,
   getData: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default Form;

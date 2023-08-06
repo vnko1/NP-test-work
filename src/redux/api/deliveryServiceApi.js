@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { LIMIT } from "/src/constants/constants";
 
 const env = import.meta.env;
 
@@ -58,7 +59,7 @@ export const deliveryServiceApi = createApi({
       },
     }),
     getWareHouses: build.mutation({
-      query: ({ city, page = 1, limit = 10 }) => ({
+      query: ({ city, page = 1, limit = LIMIT }) => ({
         method: "POST",
         body: {
           apiKey: env.VITE_API_KEY,
