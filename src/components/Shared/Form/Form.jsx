@@ -1,15 +1,14 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { TextField, Button } from "@mui/material";
 import PropTypes from "prop-types";
 
 import { setCurrentCity } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
 const Form = ({
   value,
-  setValue,
+  setStateValue,
   name,
   plaaceHolder,
   label,
@@ -40,6 +39,8 @@ const Form = ({
     }
   };
 
+  const isDisabled = isLoading || !!errors[name]?.message || !value.length;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField
@@ -50,7 +51,7 @@ const Form = ({
         fullWidth
         {...register(name, {
           ...schema,
-          onChange: (e) => setValue(e.target.value),
+          onChange: (e) => setStateValue(e.target.value),
         })}
         helperText={errors[name]?.message}
         placeholder={plaaceHolder}
@@ -61,22 +62,22 @@ const Form = ({
           },
         }}
       />
-      <LoadingButton
-        loading={isLoading}
+      <Button
+        disabled={isDisabled}
         variant="contained"
         fullWidth
         type="submit"
         disableRipple
       >
         Пошук
-      </LoadingButton>
+      </Button>
     </form>
   );
 };
 
 Form.propTypes = {
   value: PropTypes.string,
-  setValue: PropTypes.func.isRequired,
+  setStateValue: PropTypes.func.isRequired,
   setPage: PropTypes.func,
   name: PropTypes.string.isRequired,
   plaaceHolder: PropTypes.string.isRequired,
