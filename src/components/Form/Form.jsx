@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -20,9 +21,14 @@ const Form = ({
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    isLoading && clearErrors();
+  }, [clearErrors, isLoading]);
 
   const onSubmit = async (data) => {
     if (name === "trackCode") {
