@@ -6,7 +6,6 @@ import DeliveryStatus from "/src/components/DeliveryStatus/DeliveryStatus";
 import TrackCodesHistory from "/src/components/TrackCodesHistory/TrackCodesHistory";
 import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
 import {
-  setCurrentTrackCode,
   setCurrentCity,
   addTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
@@ -24,7 +23,6 @@ const TrackingPage = () => {
       data.data.forEach((item) => {
         if (item.StatusCode !== "3") {
           dispatch(setCurrentCity(item.CityRecipient));
-          dispatch(setCurrentTrackCode(item.Number));
           dispatch(
             addTrackCodesData({
               trackCode: item.Number,
