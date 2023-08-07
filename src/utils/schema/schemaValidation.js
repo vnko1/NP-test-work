@@ -10,6 +10,6 @@ export const сitySchema = {
   pattern: {
     value: /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+/,
     message: "Значення має бути в літерах",
-    required: "Це поле є обовʼязковим",
   },
+  required: "Це поле є обовʼязковим",
 };

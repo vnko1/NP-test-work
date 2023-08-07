@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { TextField, Button } from "@mui/material";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { TextField, Button, Box } from "@mui/material";
 
 import { setCurrentCity } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
@@ -20,30 +20,38 @@ const Form = ({
 }) => {
   const {
     register,
-    handleSubmit,
-    clearErrors,
+    getValues,
+    setValue,
+    trigger,
     formState: { errors },
-  } = useForm();
+  } = useForm({});
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isLoading && clearErrors();
-  }, [clearErrors, isLoading]);
+    setValue(name, value);
+    if (value.length >= schema.minLength.value) trigger();
+  }, [name, schema, setValue, trigger, value]);
 
-  const onSubmit = async (data) => {
-    if (name === "trackCode") getData([value]);
+  const onChange = (e) => {
+    setStateValue(e.target.value);
+    setValue(name, e.target.value);
+  };
 
-    if (name === "city") {
-      dispatch(setCurrentCity(data[name]));
-      getData({ city: data[name], page: 1 });
+  const onClick = async () => {
+    const res = await trigger();
+
+    if (res && name === "trackCode") getData([getValues(name)]);
+
+    if (res && name === "city") {
+      dispatch(setCurrentCity(getValues(name)));
+      // getData({ city: getValues(name), page: 1 });
       setPage(1);
     }
   };
 
-  const isDisabled = isLoading || !!errors[name]?.message || !value.length;
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Box>
       <TextField
         id="outlined"
         label={label}
@@ -52,7 +60,7 @@ const Form = ({
         fullWidth
         {...register(name, {
           ...schema,
-          onChange: (e) => setStateValue(e.target.value),
+          onChange,
         })}
         helperText={errors[name]?.message}
         placeholder={plaaceHolder}
@@ -64,15 +72,16 @@ const Form = ({
         }}
       />
       <Button
-        disabled={isDisabled}
+        disabled={isLoading}
         variant="contained"
         fullWidth
-        type="submit"
+        type="button"
         disableRipple
+        onClick={onClick}
       >
         {text}
       </Button>
-    </form>
+    </Box>
   );
 };
 

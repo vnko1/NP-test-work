@@ -1,3 +1,5 @@
 const LIMIT = 9;
 
-export { LIMIT };
+const customErrorMsg = "Упс! Щось пішло не так. Спробуйте пізніше.";
+
+export { LIMIT, customErrorMsg };

@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import { deleteTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
-const TrackCodesHistoryCard = ({ item, getData, setValue }) => {
+const TrackCodesHistoryCard = ({ item, getData, setValue, handleChange }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -14,6 +14,7 @@ const TrackCodesHistoryCard = ({ item, getData, setValue }) => {
         onClick={() => {
           getData([item.trackCode]);
           setValue(item.trackCode);
+          handleChange();
         }}
         variant="text"
       >
@@ -32,6 +33,7 @@ TrackCodesHistoryCard.propTypes = {
   getData: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default TrackCodesHistoryCard;

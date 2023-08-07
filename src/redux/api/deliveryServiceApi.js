@@ -25,7 +25,7 @@ export const deliveryServiceApi = createApi({
       invalidatesTags: ["TrackingStatus"],
       transformResponse: (response) => {
         const transformedResponse = {
-          isSuccess: response?.success,
+          success: response?.success,
           errors: response?.errors,
           errorCodes: response?.errorCodes,
         };
@@ -76,7 +76,7 @@ export const deliveryServiceApi = createApi({
       invalidatesTags: ["WareHouses"],
       transformResponse: (response) => {
         const transformedResponse = {
-          isSuccess: response?.success,
+          success: response?.success,
           errors: response?.errors,
           errorCodes: response?.errorCodes,
           total: response.info.totalCount,
