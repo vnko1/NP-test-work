@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import { Pagination, Grow, Grid, Box } from "@mui/material";
+import { Pagination, Grid, Box, Collapse } from "@mui/material";
 
 import WarehouseCard from "/src/components/FindWarehouseModule/WarehouseCard/WarehouseCard";
 
@@ -29,7 +29,7 @@ const WarehousesList = ({ documents, total, setPage, page, isSuccess }) => {
   );
   return (
     <Box sx={{ pt: 1 }}>
-      <Grow in={isSuccess} appear={true} timeout={1000}>
+      <Collapse in={isSuccess} appear={true} timeout={1000}>
         <Grid
           container
           direction="row"
@@ -40,10 +40,10 @@ const WarehousesList = ({ documents, total, setPage, page, isSuccess }) => {
         >
           {renderItem}
         </Grid>
-      </Grow>
-      <Box sx={{ display: "flex", justifyContent: "center", pt: 5 }}>
-        {pagination}
-      </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", pt: 5 }}>
+          {pagination}
+        </Box>
+      </Collapse>
     </Box>
   );
 };
