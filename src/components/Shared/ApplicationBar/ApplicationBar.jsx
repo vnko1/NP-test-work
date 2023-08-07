@@ -17,7 +17,6 @@ const pages = [
   { title: "Перевірити ТТН", link: "/" },
   { title: "Список відділень", link: "dep" },
 ];
-
 const ApplicationBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const navigate = useNavigate();
@@ -37,6 +36,7 @@ const ApplicationBar = () => {
           <Typography
             variant="h6"
             noWrap
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -44,7 +44,7 @@ const ApplicationBar = () => {
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
-              textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             NP Tracker
