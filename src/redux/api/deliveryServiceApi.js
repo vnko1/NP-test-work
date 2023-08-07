@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LIMIT, NP_URL } from "/src/constants/constants";
+import { LIMIT } from "/src/constants/constants";
 
 const env = import.meta.env;
 
 export const deliveryServiceApi = createApi({
   reducerPath: "deliveryServiceApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: NP_URL,
+    baseUrl: env.VITE_NP_URL,
   }),
   tagTypes: ["TrackingStatus", "WareHouses"],
   endpoints: (build) => ({
