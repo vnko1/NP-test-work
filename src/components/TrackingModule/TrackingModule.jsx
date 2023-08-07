@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Box } from "@mui/material";
+import toast from "react-hot-toast";
 
 import Form from "/src/components/Shared/Form/Form";
 import DeliveryStatusList from "/src/components/TrackingModule/DeliveryStatusList/DeliveryStatusList";
 import TrackCodesHistoryListMemo from "/src/components/TrackingModule/TrackCodesHistoryList/TrackCodesHistoryList";
 import Loader from "/src/components/Shared/Loader/Loader";
 import NotFoundData from "/src/components/Shared/NotFoundData/NotFoundData";
+import ErrorNotify from "/src/components/Shared/ErrorNotify/ErrorNotify";
 
 import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
 import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
@@ -16,9 +18,10 @@ import {
   addTrackCodesData,
 } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 import { trackCodeSchema } from "/src/utils/schema/schemaValidation";
+import { customErrorMsg } from "/src/constants/constants";
 
 const TrackingModule = () => {
-  const [getTrackData, { isSuccess, isLoading, data }] =
+  const [getTrackData, { isSuccess, isLoading, data, isError }] =
     useGetDelivertStatusMutation();
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
@@ -39,6 +42,11 @@ const TrackingModule = () => {
       });
     }
   }, [data, dispatch, isSuccess]);
+
+  useEffect(() => {
+    if (data && !data.success) toast.error(data.errors[0]);
+    isError && toast.error(customErrorMsg);
+  }, [data, isError]);
 
   const renderItem = isSuccess && data?.data[0]?.StatusCode !== "3" && (
     <DeliveryStatusList documents={data.data} isSuccess={isSuccess} />
@@ -72,6 +80,7 @@ const TrackingModule = () => {
       {renderItem}
       {renderNotFoundNotify}
       <Loader isLoading={isLoading} />
+      <ErrorNotify />
     </Box>
   );
 };
