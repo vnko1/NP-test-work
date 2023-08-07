@@ -45,7 +45,6 @@ const Form = ({
 
     if (res && name === "city") {
       dispatch(setCurrentCity(getValues(name)));
-      // getData({ city: getValues(name), page: 1 });
       setPage(1);
     }
   };
