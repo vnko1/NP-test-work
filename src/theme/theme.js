@@ -1,37 +1,40 @@
 import { createTheme } from "@mui/material/styles";
 
-export const theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
-      main: "#37474f",
+      main: "#00BFA5",
+      light: "#5DF2D6",
+      dark: "#008E76",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#f57f17",
+      main: "#3F51B5",
+      light: "#7986CB",
+      dark: "#303F9F",
+      contrastText: "#FFFFFF",
     },
     background: {
-      paper: "#cfd8dc",
+      default: "#F5F5F5",
+      paper: "#FFFFFF",
     },
     text: {
-      secondary: "rgba(146,141,141,0.6)",
-      primary: "rgba(32,31,31,0.87)",
+      primary: "#333333",
+      secondary: "#666666",
+      disabled: "#A0A0A0",
+    },
+    error: {
+      main: "#FF3D00",
+    },
+    success: {
+      main: "#4CAF50",
+    },
+    warning: {
+      main: "#FFC107",
+    },
+    info: {
+      main: "#2196F3",
     },
   },
-  shape: {
-    borderRadius: 4,
-  },
-  typography: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    fontWeightLight: 500,
-    h1: {
-      fontSize: 18,
-      fontWeight: 800,
-    },
-    h2: {
-      fontSize: 17,
-      fontWeight: 700,
-      textTransform: "uppercase",
-    },
-  },
-  spacing: 8,
 });
+export { theme };
