@@ -38,14 +38,13 @@ const Form = ({
     setValue(name, e.target.value);
   };
 
-  const onClick = async () => {
+  const onSubmitClick = async () => {
     const res = await trigger();
 
     if (res && name === "trackCode") getData([getValues(name)]);
 
     if (res && name === "city") {
       dispatch(setCurrentCity(getValues(name)));
-      // getData({ city: getValues(name), page: 1 });
       setPage(1);
     }
   };
@@ -77,7 +76,7 @@ const Form = ({
         fullWidth
         type="button"
         disableRipple
-        onClick={onClick}
+        onClick={onSubmitClick}
       >
         {text}
       </Button>
