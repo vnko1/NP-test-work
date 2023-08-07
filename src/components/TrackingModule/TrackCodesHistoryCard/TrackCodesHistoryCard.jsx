@@ -2,7 +2,8 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Typography, Button, IconButton } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
+
+import RemoveIcon from "@mui/icons-material/Remove";
 
 import { deleteTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
@@ -23,7 +24,7 @@ const TrackCodesHistoryCard = ({ item, getData, setValue, handleChange }) => {
       <IconButton
         onClick={() => dispatch(deleteTrackCodesData(item.trackCode))}
       >
-        <ClearIcon />
+        <RemoveIcon />
       </IconButton>
     </>
   );

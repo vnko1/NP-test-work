@@ -15,8 +15,8 @@ import {
   Zoom,
 } from "@mui/material";
 
-import ClearAllIcon from "@mui/icons-material/ClearAll";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ClearIcon from "@mui/icons-material/Clear";
 
 import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
 import { clearTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
@@ -30,7 +30,14 @@ const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
   const handleChange = () => setExpanded((state) => !state);
 
   const renderItem = (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <List>
         {trackCodes.map((item, index) => {
           return (
@@ -45,13 +52,10 @@ const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
           );
         })}
       </List>
-      <IconButton
-        sx={{ mx: "auto" }}
-        onClick={() => dispatch(clearTrackCodesData())}
-      >
-        <ClearAllIcon />
+      <IconButton onClick={() => dispatch(clearTrackCodesData())}>
+        <ClearIcon />
       </IconButton>
-    </>
+    </Box>
   );
 
   return (
@@ -71,7 +75,13 @@ const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Історя пошуку</Typography>
+            <Typography
+              sx={{
+                ml: 2,
+              }}
+            >
+              Історя пошуку
+            </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ minHeight: 175 }}>
             {renderItem}
