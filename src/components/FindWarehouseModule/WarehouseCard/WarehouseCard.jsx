@@ -39,18 +39,20 @@ const WarehouseCard = ({ item }) => {
               </Box>
             </Link>
           </Box>
-          <Link
-            href={`tel:+${item.Phone}`}
-            sx={{
-              textDecoration: "none",
-              cursor: "pointer",
-              display: "flex",
-              gap: 3,
-              alignItems: "center",
-            }}
-          >
-            <LocalPhoneIcon />+{item.Phone}
-          </Link>
+          {item.Phone ? (
+            <Link
+              href={`tel:+${item.Phone}`}
+              sx={{
+                textDecoration: "none",
+                cursor: "pointer",
+                display: "flex",
+                gap: 3,
+                alignItems: "center",
+              }}
+            >
+              <LocalPhoneIcon />+{item.Phone}
+            </Link>
+          ) : null}
           <Box
             sx={{
               cursor: "pointer",
