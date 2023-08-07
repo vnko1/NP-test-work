@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { nanoid } from "nanoid";
+
 import PropTypes from "prop-types";
 
 import {
@@ -11,6 +11,8 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Box,
+  Zoom,
 } from "@mui/material";
 
 import ClearAllIcon from "@mui/icons-material/ClearAll";
@@ -20,17 +22,17 @@ import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selector
 import { clearTrackCodesData } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 import TrackCodesHistoryCard from "/src/components/TrackingModule/TrackCodesHistoryCard/TrackCodesHistoryCard";
 
-const TrackCodesHistoryList = ({ getData, setValue }) => {
+const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
   const trackCodes = useSelector(selectTrackCodesData);
 
   const dispatch = useDispatch();
 
-  const renderItem = trackCodes.length > 0 && (
+  const renderItem = (
     <>
       <List>
-        {trackCodes.map((item) => {
+        {trackCodes.map((item, index) => {
           return (
-            <ListItem key={nanoid()}>
+            <ListItem key={index}>
               <TrackCodesHistoryCard
                 item={item}
                 getData={getData}
@@ -50,22 +52,37 @@ const TrackCodesHistoryList = ({ getData, setValue }) => {
   );
 
   return (
-    <Accordion sx={{ mt: 1 }}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+    <Zoom in={isRendering} timeout={500}>
+      <Box
+        sx={{
+          mt: 1,
+          maxWidth: [1, 1, 1 / 5],
+          width: "100%",
+          position: "absolute",
+          right: 0,
+        }}
       >
-        <Typography>Історя пошуку</Typography>
-      </AccordionSummary>
-      <AccordionDetails>{renderItem}</AccordionDetails>
-    </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Історя пошуку</Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ minHeight: 175 }}>
+            {renderItem}
+          </AccordionDetails>
+        </Accordion>
+      </Box>
+    </Zoom>
   );
 };
 
 TrackCodesHistoryList.propTypes = {
   getData: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
+  isRendering: PropTypes.bool.isRequired,
 };
 
 const TrackCodesHistoryListMemo = memo(TrackCodesHistoryList);

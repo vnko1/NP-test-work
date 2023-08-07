@@ -12,7 +12,7 @@ const WarehousesList = ({ documents, total, setPage, page, isSuccess }) => {
   };
 
   const renderItem = documents.map((item) => (
-    <Grid item xs={3} sm={4} md={4} key={item.Ref}>
+    <Grid key={item.Ref} item xs={4} sm={4} md={4}>
       <WarehouseCard item={item} />
     </Grid>
   ));
@@ -22,6 +22,9 @@ const WarehousesList = ({ documents, total, setPage, page, isSuccess }) => {
       count={Math.ceil(total / LIMIT)}
       page={page}
       onChange={handleChange}
+      size="small"
+      variant="text"
+      sx={{ mb: 2 }}
     />
   );
   return (
@@ -32,13 +35,15 @@ const WarehousesList = ({ documents, total, setPage, page, isSuccess }) => {
           direction="row"
           justifyContent="space-around"
           alignItems="center"
-          spacing={{ xs: 2, md: 3 }}
+          spacing={{ xs: 2, md: 4 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {renderItem}
         </Grid>
       </Grow>
-      {pagination}
+      <Box sx={{ display: "flex", justifyContent: "center", pt: 5 }}>
+        {pagination}
+      </Box>
     </Box>
   );
 };

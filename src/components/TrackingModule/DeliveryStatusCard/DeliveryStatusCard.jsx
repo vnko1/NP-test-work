@@ -3,7 +3,7 @@ import { Typography, CardContent, Card, Zoom } from "@mui/material";
 
 const DeliveryStatusCard = ({ isSuccess, item }) => {
   return (
-    <Zoom in={isSuccess} timeout={500} sx={{ mt: 2 }}>
+    <Zoom in={isSuccess} timeout={500} sx={{ mt: [8, 8, 1] }}>
       <Card sx={{ boxShadow: 5 }}>
         <CardContent sx={{ textAlign: "center", p: 2 }}>
           <Typography sx={{ fontSize: 20, fontWeight: 900 }}>

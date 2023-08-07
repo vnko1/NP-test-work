@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Fade, Popper, Box, Button } from "@mui/material";
 
-const PopperEl = ({ children }) => {
+const PopperEl = ({ children, content, icon }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
@@ -23,12 +23,17 @@ const PopperEl = ({ children }) => {
           </Fade>
         )}
       </Popper>
-      <Button onClick={handleClick("right")}>Графік роботи</Button>
+      <Button onClick={handleClick("right-start")} sx={{ p: 0 }}>
+        {icon}
+        {content}
+      </Button>
     </Box>
   );
 };
 
 PopperEl.propTypes = {
   children: PropTypes.node.isRequired,
+  content: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
 };
 export default PopperEl;

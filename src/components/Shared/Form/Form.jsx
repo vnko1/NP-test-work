@@ -1,10 +1,7 @@
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button } from "@mui/material";
 import PropTypes from "prop-types";
-
-import { setCurrentCity } from "/src/redux/slices/deliveryService/deliveryServiceSlice";
 
 const Form = ({
   value,
@@ -24,7 +21,6 @@ const Form = ({
     clearErrors,
     formState: { errors },
   } = useForm();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     isLoading && clearErrors();
@@ -34,7 +30,6 @@ const Form = ({
     if (name === "trackCode") getData([value]);
 
     if (name === "city") {
-      dispatch(setCurrentCity(data[name]));
       getData({ city: data[name], page: 1 });
       setPage(1);
     }

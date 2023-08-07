@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Box } from "@mui/material";
 
 import Form from "/src/components/Shared/Form/Form";
 import DeliveryStatusList from "/src/components/TrackingModule/DeliveryStatusList/DeliveryStatusList";
@@ -8,6 +10,7 @@ import Loader from "/src/components/Shared/Loader/Loader";
 import NotFoundData from "/src/components/Shared/NotFoundData/NotFoundData";
 
 import { useGetDelivertStatusMutation } from "/src/redux/api/deliveryServiceApi";
+import { selectTrackCodesData } from "/src/redux/slices/deliveryService/selectors";
 import {
   setCurrentCity,
   addTrackCodesData,
@@ -19,6 +22,7 @@ const TrackingModule = () => {
     useGetDelivertStatusMutation();
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
+  const trackCodes = useSelector(selectTrackCodesData);
 
   useEffect(() => {
     if (isSuccess) {
@@ -40,11 +44,19 @@ const TrackingModule = () => {
     <DeliveryStatusList documents={data.data} isSuccess={isSuccess} />
   );
 
+  const renderHistory = trackCodes.length > 0 && (
+    <TrackCodesHistoryListMemo
+      getData={getTrackData}
+      setValue={setValue}
+      isRendering={trackCodes.length > 0}
+    />
+  );
+
   const renderNotFoundNotify = isSuccess &&
     data?.data[0]?.StatusCode === "3" && <NotFoundData />;
 
   return (
-    <>
+    <Box sx={{ position: "relative" }}>
       <Form
         value={value}
         name="trackCode"
@@ -56,11 +68,11 @@ const TrackingModule = () => {
         setStateValue={setValue}
         text="Відстежити відправлення"
       />
-      <TrackCodesHistoryListMemo getData={getTrackData} setValue={setValue} />
+      {renderHistory}
       {renderItem}
       {renderNotFoundNotify}
       <Loader isLoading={isLoading} />
-    </>
+    </Box>
   );
 };
 
