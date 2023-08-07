@@ -24,13 +24,10 @@ import TrackCodesHistoryCard from "/src/components/TrackingModule/TrackCodesHist
 
 const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
   const [expanded, setExpanded] = useState(false);
-
-  const handleChange = () => {
-    setExpanded((state) => !state);
-  };
   const trackCodes = useSelector(selectTrackCodesData);
-
   const dispatch = useDispatch();
+
+  const handleChange = () => setExpanded((state) => !state);
 
   const renderItem = (
     <>
