@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import PropTypes from "prop-types";
@@ -23,6 +23,11 @@ import { clearTrackCodesData } from "/src/redux/slices/deliveryService/deliveryS
 import TrackCodesHistoryCard from "/src/components/TrackingModule/TrackCodesHistoryCard/TrackCodesHistoryCard";
 
 const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = () => {
+    setExpanded((state) => !state);
+  };
   const trackCodes = useSelector(selectTrackCodesData);
 
   const dispatch = useDispatch();
@@ -37,6 +42,7 @@ const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
                 item={item}
                 getData={getData}
                 setValue={setValue}
+                handleChange={handleChange}
               />
             </ListItem>
           );
@@ -62,7 +68,7 @@ const TrackCodesHistoryList = ({ getData, setValue, isRendering }) => {
           right: 0,
         }}
       >
-        <Accordion>
+        <Accordion expanded={expanded} onChange={() => handleChange()}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
