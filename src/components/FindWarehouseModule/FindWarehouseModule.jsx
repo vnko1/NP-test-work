@@ -19,7 +19,7 @@ const FindWarehouseModule = () => {
     useGetWareHousesMutation();
 
   useEffect(() => {
-    page > 1 && getWarhouses({ city: currentCity, page });
+    getWarhouses({ city: currentCity, page });
   }, [currentCity, getWarhouses, page]);
 
   const renderItem = isSuccess && data.total > 0 && (
