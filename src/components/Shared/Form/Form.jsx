@@ -38,7 +38,7 @@ const Form = ({
     setValue(name, e.target.value);
   };
 
-  const onClick = async () => {
+  const onSubmitClick = async () => {
     const res = await trigger();
 
     if (res && name === "trackCode") getData([getValues(name)]);
@@ -76,7 +76,7 @@ const Form = ({
         fullWidth
         type="button"
         disableRipple
-        onClick={onClick}
+        onClick={onSubmitClick}
       >
         {text}
       </Button>
