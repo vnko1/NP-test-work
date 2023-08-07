@@ -1,15 +1,12 @@
-![image](https://github.com/thelostsoul88/vite-template/assets/48189332/03304ce3-18d3-476c-857a-bf4db07472de)
+# NP Tracker app
 
- Ready to use template Vite with react routes support
- 
- To use:
- - press button 'Use this template' and press 'create a new repo'
- 
- Setup base on vite.config:
- - base: "/[REPO_NAME]/"
+This project was created with
+[Vite](https://vitejs.dev/)
 
- In package.json:
- - "name": "[REPO_NAME]",
+## TECHNOLOGY STACK
 
-If You use a SPA app, for deployment on gh-pages, you should use hashRouter instead of browserRouter. 
-Also, the hashRouter component must be given the props "basename='/reponame'>"
+- React
+- React Router DOM
+- Material-UI (MUI)
+- RTQ Query
+- GitHub
