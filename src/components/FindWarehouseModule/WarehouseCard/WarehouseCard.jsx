@@ -9,7 +9,15 @@ import PopperEl from "/src/components/Shared/PopperEl/PopperEl";
 
 const WarehouseCard = ({ item }) => {
   return (
-    <Card>
+    <Card
+      sx={{
+        minHeight: [200, 210, 250],
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <CardContent>
         <Box
           sx={{
@@ -18,7 +26,7 @@ const WarehouseCard = ({ item }) => {
             pl: 3,
           }}
         >
-          <Box sx={{ minHeight: [150, 165, 165, 120] }}>
+          <Box>
             <Link
               href={`https://maps.google.com?saddr=Current+Location&daddr=${item.Latitude},${item.Longitude}`}
               target="_blank"
